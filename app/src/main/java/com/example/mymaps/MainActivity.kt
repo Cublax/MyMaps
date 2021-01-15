@@ -1,5 +1,6 @@
 package com.example.mymaps
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,8 @@ import com.example.mymaps.models.UserMap
 
 private const val TAG = "MainActivity"
 const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
+const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
+const val REQUEST_CODE = 1234
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -32,11 +35,20 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
-
-        // when user tap on view in RV, navigate to new activity
-
+        binding.fabCreateMap.setOnClickListener {
+            Log.i(TAG, "Tap on FAB")
+            val intent = Intent(this@MainActivity, CreateMapActivity::class.java)
+            intent.putExtra(EXTRA_MAP_TITLE, "new map name")
+            startActivityForResult(intent, REQUEST_CODE)
+        }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
     private fun generateSampleData(): List<UserMap> {
         return listOf(
                 UserMap(
