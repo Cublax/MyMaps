@@ -1,11 +1,16 @@
 package com.example.mymaps
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymaps.databinding.ActivityMainBinding
 import com.example.mymaps.models.Place
 import com.example.mymaps.models.UserMap
+
+private const val TAG = "MainActivity"
+const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -19,7 +24,17 @@ class MainActivity : AppCompatActivity() {
         // Set layout manager on recycle View
         binding.rvMaps.layoutManager = LinearLayoutManager(this)
         // Set adapter on recycle View
-        binding.rvMaps.adapter = MapsAdapter(this, userMaps)
+        binding.rvMaps.adapter = MapsAdapter(this, userMaps, object: MapsAdapter.OnClickListner {
+            override fun onItemClick(position: Int) {
+                Log.i(TAG, "on click item $position")
+                val intent = Intent(this@MainActivity, DisplayMapActivity::class.java)
+                intent.putExtra(EXTRA_USER_MAP, userMaps[position])
+                startActivity(intent)
+            }
+        })
+
+        // when user tap on view in RV, navigate to new activity
+
     }
 
     private fun generateSampleData(): List<UserMap> {
