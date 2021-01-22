@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, DisplayMapActivity::class.java)
                 intent.putExtra(EXTRA_USER_MAP, userMaps[position])
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         })
         binding.rvMaps.adapter = mapAdapter
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         val dialog =
                 AlertDialog
                         .Builder(this)
-                        .setTitle("Map Title")
+                        .setTitle("Map Title:")
                         .setView(mapFormView)
                         .setNegativeButton("Cancel", null)
                         .setPositiveButton("OK", null)
