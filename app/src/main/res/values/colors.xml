@@ -2,12 +2,12 @@
 
 
 <resources>
-    <color name="purple_200">#202020</color>
+    <color name="purple_200">#FFFFFF</color>
     <color name="purple_500">#0F7463</color>
     <color name="purple_700">#0A463A</color>
-    <color name="teal_200">#E91E63</color>
+    <color name="teal_200">#ED0606</color>
     <color name="teal_700">#0C3728</color>
-    <color name="black">#0C372B</color>
+    <color name="black">#FFFFFF</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
 
